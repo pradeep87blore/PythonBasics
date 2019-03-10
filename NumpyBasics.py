@@ -145,7 +145,23 @@ def ArrayCreation():
 
     #  To force printing the entire array, set np.set_printoptions(threshold=np.nan)
 
+    # Creating an array from using the random object:
+    # numpy.random.rand(d0, d1, ..., dn)
+    #   -> Create an array of the given shape and populate it with random
+    #      samples from a uniform distribution over [0, 1).
+    print(np.random.rand(3, 2))
+    # Example output:
+    # [[0.96998764 0.29951753]
+    #  [0.18584147 0.13551683]
+    #  [0.49355695 0.23795125]]
 
+    # numpy.random.randn(d0, d1, ..., dn)
+    #   -> Return a sample (or samples) from the “standard normal” distribution.
+    print(np.random.randn(3, 2))
+    # Example output:
+    #  [[-0.59547268, -1.2990651],
+    #   [-0.8873276, -0.57430988],
+    #   [0.75189181, 1.54554595]]
 
 def ArrayShapeManipulation():
     # We can use the reshape function to alter the dimensions of an existing array
@@ -188,11 +204,107 @@ def ArrayShapeManipulation():
     print("Resize altered the array \n{0} to \n{1}".format(npTempArr, np.resize(npTempArr,(3,2))))
     # Note the usage of the resize function. It is a method of the np object, not the array object
 
+def ArrayBasicOperations():
+    # Operations on the arrays are performed elementwise. This results in a new array, the original is unaffected
+
+    # When operating with arrays of different types, the type of the resulting array corresponds to the more general
+    # or precise one (a behavior known as upcasting).
+    # If such a casting cannot happen, an error is thrown. For e.g., if we operate between an array of strings and
+    # an array of integers
+    # a = np.array(['a','b'])
+    # b = np.array([1,2])
+    # print(a + b)
+    # TypeError: ufunc 'add' did not contain a loop with signature matching types dtype('<U11') dtype('<U11')
+    # dtype('<U11')
+
+    npTempArr = np.arange(1, 11)
+    print(npTempArr)      # [ 1  2  3  4  5  6  7  8  9 10]
+    print(npTempArr + 1)  # [ 2  3  4  5  6  7  8  9 10 11]
+    print(npTempArr - 2)  # [-1  0  1  2  3  4  5  6  7  8]
+    print(npTempArr * 3)  # [ 3  6  9 12 15 18 21 24 27 30]
+    print(npTempArr / 2)  # [0.5 1.  1.5 2.  2.5 3.  3.5 4.  4.5 5. ]
+
+    # To perform these operations in place, use the += operator, -= operator, etc.
+    npTempArr += 3
+    print(npTempArr)   # npTempArr is now changed to [ 3  6  9 12 15 18 21 24 27 30]
+
+    # Testing divide by zero
+    npTempArr = np.arange(-1, 5)
+    print(npTempArr)      # [-1  0  1  2  3  4]
+    print(npTempArr / 0)  # RuntimeWarning: invalid value encountered in true_divide print(npTempArr / 0)
+    # Prints [-inf  nan  inf  inf  inf  inf]
+
+    # Operations between arrays:
+    # This results in a new array whose elements are [arr1]operand[arr2]
+    npArr1 = np.arange(-5, 5)
+    npArr2 = np.arange(0, 10)
+
+    print("Arrays are :\n{0} \nand \n{1}\n".format(npArr1, npArr2))
+    print("Adding them:")
+    print(npArr1 + npArr2)      # [-5 -3 -1  1  3  5  7  9 11 13]
+    print("Subtracting them:")
+    print(npArr1 - npArr2)      # [-5 -5 -5 -5 -5 -5 -5 -5 -5 -5]
+    print("Multiplying them:")
+    print(npArr1 * npArr2)      # [ 0 -4 -6 -6 -4  0  6 14 24 36]
+    print("Dividing them:")
+    print(npArr1 / npArr2)      # [ -inf -4. -1.5 -0.66666667 -0.25 0. 0.16666667 0.28571429 0.375 0.44444444]
+
+    # In place operation:
+    npArr1 += npArr2
+    print("\n\nnpArr1 after an inplace operation, npArr1 += npArr2:")
+    print(npArr1)
+
+    # To produce actual matrix multiplication, we need to use the @ operator or the .dot function:
+    print("Matrix multiplcation:")
+    npArr1 = np.array([[1,2],[3,4],[5,6]])
+    npArr2 = np.array([[10,20],[30,40]])
+
+    print("The arrays are \n{0}\nand\n{1}".format(npArr1, npArr2))
+
+    # [[1 2]
+    #  [3 4]
+    #  [5 6]]
+
+    # [[10 20]
+    #  [30 40]]
+
+    print("Result of matrix multiplication:")
+    print(npArr1 @ npArr2)
+    print(npArr1.dot(npArr2))
+
+    # Both produce:
+    # [[70 100]
+    #  [150 220]
+    #  [230 340]]
+
+    # Some useful functions
+
+    npTempArr = np.random.rand(3,4)
+    # Finding the sum of all the elements in the array:
+    print("Sum of elements of \n{0}\nis\n{1}".format(npTempArr, npTempArr.sum()))
+    print("Min element is {0} and max element is {1}".format(npTempArr.min(), npTempArr.max()))
+
+    # We can specify the axis along which we need to operate to get an array of outputs instead of a single value:
+    print("Sum of elements along each rows:")
+    print(npTempArr.sum(axis=1))
+    print("Sum of elements along each column:")
+    print(npTempArr.sum(axis=0))
+
+    # Similarly, we can find the min and max for each row or column:
+
+    print("Min element for each row is: \n{0}".format(npTempArr.min(axis=1)))
+    print("Min element for each column is: \n{0}".format(npTempArr.min(axis=0)))
+    print("Max element for each row is: \n{0}".format(npTempArr.min(axis=1)))
+    print("Max element for each column is: \n{0}".format(npTempArr.min(axis=0)))
+
+    # TODO: Demonstrate using universal functions like sin, cos, etc. here:
+
 def Main():
 
-   print("Numpy Basics")
-   # ArrayCreation()
+   print("Numpy Array Basics")
+   ArrayCreation()
    ArrayShapeManipulation()
+   ArrayBasicOperations()
 
 
 
