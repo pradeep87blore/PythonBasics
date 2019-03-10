@@ -12,17 +12,187 @@ import numpy as np
 
 # Numpy's array is called a ndarray. It is aliased as an array. This is different from the Python's array module array
 
+# Note that when we print arrays:
+# One-dimensional arrays are then printed as rows
+# Bidimensionals are printed as matrices
+# Tridimensionals are printed as lists of matrices.
+
 def ArrayCreation():
-    pass
 
-    #npArray = np.array([1, 2, 3])
-    #print(npArray)
+    # Basic single dimension array creation from a list:
+    print("Basic single dimension array creation from a list:")
+    npArray = np.array([1, 2, 3])
+    print(npArray)
+    print(npArray.dtype)        # This prints the type of the data of the nparray. Here, it returns int32
+    print(npArray.itemsize)     # Prints the size of each element (in bytes) in this array. Here, it prints 4
+    print(npArray.size)         # Prints the size of the array. Here, it prints 3
+    print(npArray.ndim)         # Prints the dimensions of the array. Here, it prints 1
+    print(npArray.shape)        # Prints the dimensios of the array. Here, it prints (3,)
+    print(npArray.data)         # Prints the details of the buffer containing the data. Prints something like <memory at 0x000001B51225F588>
+
+    # A single dimension array with floats
+    print("\n\nA single dimension array with floats: ")
+    npFloatArray = np.array([1.1, 2.2, 3.3])
+    print(npFloatArray)
+    print(npFloatArray.dtype)  # Prints float64
+    print(npFloatArray.itemsize)  # It prints 8  (since the data type is a float64, i.e., 64 bites or 8 bytes)
+
+    # A single dimension array created from a tuple
+    print("\n\nA single dimension array created from a tuple: ")
+    npArrayFromTuple = np.array(('a', 'b', 'c'))
+    print(npArrayFromTuple)
+    print(npArrayFromTuple.dtype)  # Prints <U1 representing a 1 byte unsigned integer
+
+    # This produces an error if run
+    # npArr = np.array(1,2,3)   # ValueError: only 2 non-keyword arguments accepted
+
+    # Arrays convert sequence of sequences into 2d arrays, sequence of sequence of sequences in 3d arrays and so on
+    seqOfSeqList = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+    npArrSeqOfSeq = np.array(seqOfSeqList)
+    print("List of Lists: \n{0}".format(seqOfSeqList))
+    print("Array from List of Lists: \n{0}\nShape: {1}, Dimension {2}, Size {3}".format(npArrSeqOfSeq, npArrSeqOfSeq.shape,
+                                                                                        npArrSeqOfSeq.ndim, npArrSeqOfSeq.size))
+    # Shape: (3, 3), Dimension 2, Size 9
+
+    seqOfSeqOfSeqTuple = (((1,2),(3,4)),((5,6),(7,8)))
+    npArrSeqOfSeqOfSeq = np.array(seqOfSeqOfSeqTuple)
+
+    print("Tuple of Tuples of Tuples: \n{0}".format(seqOfSeqOfSeqTuple))
+    print("Array from Tuple of Tuples of Tuples: \n{0}\nShape: {1}, Dimension {2}, Size {3}".format(npArrSeqOfSeqOfSeq,
+                                                                                        npArrSeqOfSeqOfSeq.shape,
+                                                                                        npArrSeqOfSeqOfSeq.ndim,
+                                                                                        npArrSeqOfSeqOfSeq.size))
+    # Shape: (2, 2, 2), Dimension 3, Size 8
+
+    # Creating arrays from heterogenous lists lead to all the elements getting converted to one single type
+    print("\n\nArrays created from heterogenous lists:")
+    npHeterogenousArr = np.array([1, 'b', 1.5])
+    print(npHeterogenousArr)  # everything here becomes a string: ['1' 'b' '1.5']
+    print(npHeterogenousArr.dtype)  # <U11
+    npHeterogenousArr = np.array([1, True, 1.5])
+    print(npHeterogenousArr)  # everything here becomes a float: [1.  1.  1.5]
+    print(npHeterogenousArr.dtype)  # float64
+
+    # Specifying the data type of the array elements at the creation time:
+    print("\n\nArrays created by specifying the data type at the creation time:")
+    npStringArr = np.array([1,2,3], dtype = str)
+    print(npStringArr)
+    npFloatArray = np.array((1,2,3), dtype=float)
+    print(npFloatArray)
+    # If we specify a type that cannot accomodate the values passed in, we get an error:
+    # ValueError: invalid literal for int() with base 10: 'a'
+    # npTestArr = np.array(['a', 1], dtype=int)
+    # print(npTestArr)
+
+    # Array expansion operations are expensive. Hence, if we have a scenario where we know the array size in advance,
+    # we can then initialize an array of that specified size and have it initialized with zeroes or ones or some random numbers:
+    print("\n\nCreating blank arrays: ")
+    # The first param, shape, can be a tuple or a list, specifying the dimensions of the array
+    # The second param, dtype, specifies the type of the array elements. Default value is float
+    # This has a third parameter called order, which can be used to specify a row major or a column major order
+    # The params are either 'C' or 'F' for either C style or Fortran style. We can leave as the default value ('C')
+    npZeroArr = np.zeros(shape = (3,4), dtype=int)
+    print(npZeroArr)
+    npOnesArr = np.ones([2,3], dtype=str)
+    print(npOnesArr)
+    npEmptyArr = np.empty((2,3))
+    print(npEmptyArr)  # Prints some random numbers that are present in the memory where this is created
+
+    # Creating arrays using arange:
+    # numpy provides the arange function that is similar to the range function provided by python
+    # Instead of returing a list like the range does, arange returns an array
+    # Signature: numpy.arange([start, ]stop, [step, ]dtype=None)
+    # Default start value is 0. Default step is 1
+    print("\n\nUsing the arange to generate arrays:")
+    print(np.arange(10, 50, 2))  # Prints [10 12 14 16 18 20 22 24 26 28 30 32 34 36 38 40 42 44 46 48]
+    print(np.arange(-5, 5, 1.2))  # Prints [-5.  -3.8 -2.6 -1.4 -0.2  1.   2.2  3.4  4.6]
+    print(np.arange(5))  # Prints [0 1 2 3 4] since 5 is taken as the mandatory parameter, stop
+    # print(np.arange('a', 'z', 1))  # Error: TypeError: unsupported operand type(s) for -: 'str' and 'str'
+
+    # If we want to create an array for floats, it is better to use linspace instead of arange due to the
+    # unpredictablility of using floats
+    # numpy.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None, axis=0)
+    # From the documentation:
+    # Return evenly spaced numbers over a specified interval.    #
+    # Returns num evenly spaced samples, calculated over the interval [start, stop].    #
+    # The endpoint of the interval can optionally be excluded.
+
+    print("\n\nUsing linspace to generate float arrays:")
+    print(np.linspace(start=-5, stop=7, num=11))  # [-5.  -3.8 -2.6 -1.4 -0.2  1.   2.2  3.4  4.6  5.8  7. ]
+
+    # There are some functions that can create arrays of the same dimensions as the existing ones:
+    npSampleArr = np.array([[1,2,3],[4,5,6]])
+    print("Template array is {0}".format(npSampleArr))
+    print("Zeros array using zeros_like: {0}".format(np.zeros_like(npSampleArr)))
+    print("Ones array using ones_like: {0}".format(np.ones_like(npSampleArr)))
+    print("Empty array using empty_like: {0}".format(np.empty_like(npSampleArr)))
+    print("Using full_like to initialize an array of same size as an existing one but with a default value:")
+    # If the fill_value can't match the original array type, we need to specify the destination array type
+    # Else, we will get an error
+    print(np.full_like(npSampleArr, fill_value='a', dtype=str))
+
+    # If an array is too big to print, only the head and tail sections are printed out
+    npLargeArr = np.arange(10000)
+    print(npLargeArr)  # Printed [   0    1    2 ... 9997 9998 9999]
+    npLargeArr = npLargeArr.reshape(5, 2000)
+    print(npLargeArr)
+    # The above printed:
+    # [[0    1    2... 1997 1998 1999]
+    # [2000 2001 2002... 3997 3998 3999]
+    # [4000 4001 4002 ... 5997 5998 5999]
+    # [6000 6001 6002 ... 7997 7998 7999]
+    # [8000 8001 8002 ... 9997 9998 9999]]
+
+    #  To force printing the entire array, set np.set_printoptions(threshold=np.nan)
 
 
+
+def ArrayShapeManipulation():
+    # We can use the reshape function to alter the dimensions of an existing array
+
+    np1dArray = np.arange(10)
+    print("Existing array {0} is of shape {1}".format(np1dArray, np1dArray.shape))  # [0 1 2 3 4 5 6 7 8 9], shape (10,)
+    npReshapedArr = np1dArray.reshape(2,5)
+    print("Reshaped array {0} is of shape {1}".format(npReshapedArr, npReshapedArr.shape))
+    # The original array is converted to :
+    #[[0 1 2 3 4]
+    # [5 6 7 8 9]]
+    # Shape: shape (2, 5)
+
+    npFlattenedArr = np.ravel(npReshapedArr)
+    print("Flattened array : {0}".format(npFlattenedArr))  # [0 1 2 3 4 5 6 7 8 9]
+    # Transpose of a matrix is the matrix whose rows are the columns of the original matrix and
+    # whose columns are the rows of the original matrix
+    # Thus, if the original matrix is :
+    # [[1, 2],
+    #  [3, 4],
+    #  [5, 6]]
+    # then the transposed matrix will be:
+    # [[1, 3, 5],
+    #  [2, 4, 6]]
+    # To obtain the transpose of an array:
+    npTempArr = np.array([[1,2],[3,4],[5,6]])
+    print("The transpose of the array \n{0} \nis \n{1}".format(npTempArr, npTempArr.T))
+    # The transpose of the array
+    # [[1 2]
+    #  [3 4]
+    #  [5 6]]
+    # is
+    # [[1 3 5]
+    #  [2 4 6]]
+
+    # Reshape, Ravel and Transpose do not modify the original array.
+    # Resize does
+    # numpy.resize(a, new_shape)[source]
+    npTempArr = np.arange(6)
+    print("Resize altered the array \n{0} to \n{1}".format(npTempArr, np.resize(npTempArr,(3,2))))
+    # Note the usage of the resize function. It is a method of the np object, not the array object
 
 def Main():
+
    print("Numpy Basics")
-   ArrayCreation()
+   # ArrayCreation()
+   ArrayShapeManipulation()
 
 
 
