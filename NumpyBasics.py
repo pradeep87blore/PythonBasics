@@ -299,13 +299,154 @@ def ArrayBasicOperations():
 
     # TODO: Demonstrate using universal functions like sin, cos, etc. here:
 
+def ArrayUniversalFunctions():
+
+    testArray = np.random.randn(1, 10)
+    print("The array is :")
+    print(testArray)
+
+    # Exponential function
+    print("Exponential function:")
+    print(np.exp(testArray))
+
+    # Sin function
+    print("Sin function:")
+    print(np.sin(testArray))
+
+    # Square Root
+    print("Square Root for the positive values:")
+    print(np.sqrt(testArray[testArray >= 0]))
+
+    # Max value
+    print("Max value in the array:")
+    print(np.max(testArray))
+
+    # Min value
+    print("Min value in the array:")
+    print(np.min(testArray))
+
+    # Mean
+    print("Mean value is:")
+    print(np.mean(testArray))
+
+    # Median
+    print("Median value is:")
+    print(np.median(testArray))
+
+    # Standard Deviation
+    print("Std Deviation is:")
+    print(np.std(testArray))
+
+    # Link for all the available functions: https://docs.scipy.org/doc/numpy/reference/ufuncs.html
+
+
+def ArraySlicingAndSelectionOperations():
+    # This function demos some slicing operations on the Numpy Arrays
+    print("\nDemonstrating array slicing operations")
+    arr = np.arange(10)
+    print("The array is: ")
+    print(arr)
+
+    print("Selecting the 5th element using arr[5]")
+    print(arr[5])
+
+    print("Selecting upto and excluding the 4th element using arr[:4]")
+    print(arr[:4])
+
+    print("Selecting from the 6th element to the last element using arr[6:]")
+    print(arr[6:])
+
+    print("Selecting the 2nd to 4th element, excluding the 4th element using arr[2:4]")
+    print(arr[2:4])
+
+    print("Selecting the last element using arr[-1]")
+    print(arr[-1])
+
+    print("\nSlicing a 2d array:")
+
+    arr2d = np.arange(9).reshape(3,3)
+    print("The 2d array is:")
+    print(arr2d)
+
+    print("\nSlicing using the Square bracket notation:")
+    print("Selecting the first row using arr2d[0]")
+    print(arr2d[0])
+
+    print("Selecting the element at 1,1")
+    print(arr2d[1][1])
+
+    print("\nSlicing using the comma notation:")
+    print("Selecting the top left four elements using arr2d[:2, :2]")
+    # Everything from the beginning up to and excluding the 2nd row
+    # Everything from the beginning up to and excluding the 2nd column
+    print(arr2d[:2, :2])
+
+    print("Consider the following larger array:")
+    arr2d = np.arange(40).reshape(5,8)
+    print(arr2d)
+
+    # array([[ 0,  1,  2,  3,  4,  5,  6,  7],
+    #        [ 8,  9, 10, 11, 12, 13, 14, 15],
+    #        [16, 17, 18, 19, 20, 21, 22, 23],
+    #        [24, 25, 26, 27, 28, 29, 30, 31],
+    #        [32, 33, 34, 35, 36, 37, 38, 39]])
+
+    print("To fetch [[1,2][9,10]] using arr2d[0:2, 1:3]")
+    print(arr2d[0:2, 1:3])
+
+    print("To fetch all rows from the 5th column using arr2d[:, 5]")
+    print(arr2d[:, 5])  # Returns [ 5, 13, 21, 29, 37]
+
+    print("To fetch all the columns in the 2nd row using arr2d[2, :]")
+    print(arr2d[2, :])  # This is same as arr2d[2]
+
+    print("Please note that the sliced array still refers to the same memory as the original")
+    print("Consider the array arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]")
+    arr = np.arange(0, 10)
+    print(arr)
+    print("Consider a slice using arrNew = arr[:4]")
+    arrNew = arr[:4]  # [0 1 2 3]
+    print(arrNew)
+    print("Now, we change the values of arrNew using arrNew[:] = 99")
+    arrNew[:] = 99
+    print(arrNew)
+    print("If we see the original array, arr:")
+    print(arr)  # [99 99 99 99  4  5  6  7  8  9]
+
+    print("The original array has also changed now. To prevent this, use the copy method")
+    arr = np.arange(10)
+    print("If this is the original array created using np.arange(10)")
+    print(arr)
+    print("And if this is the copied slice using arr[:4].copy()")
+    arrCopy = arr[:4].copy()
+    print(arrCopy)  # [0 1 2 3]
+    print("Operating on the copied array using arrCopy[:] = 99")
+    arrCopy[:] = 99
+    print(arrCopy)
+    print("Original array is: ")
+    print(arr)
+    print("Thus, the original array is unchanged now")
+
+
+    print("\nSelecting the array elements based on some condition:")
+    print("Consider the following array:")
+    arr = np.random.randint(0, 20, 10)
+    print(arr)
+
+    print("Selecting all elements greater than 10 using arr[arr > 10]")
+    print(arr[arr > 10])
+
+    print("To get a boolean array with boolean values indicating a condition's outcome:")
+    print(arr > 10)
+
 def Main():
 
    print("Numpy Array Basics")
    ArrayCreation()
    ArrayShapeManipulation()
    ArrayBasicOperations()
-
+   ArrayUniversalFunctions()
+   ArraySlicingAndSelectionOperations()
 
 
 if __name__ == "__main__":

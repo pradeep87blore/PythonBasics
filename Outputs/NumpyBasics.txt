@@ -1,0 +1,267 @@
+Numpy Array Basics
+Basic single dimension array creation from a list:
+[1 2 3]
+int32
+4
+3
+1
+(3,)
+<memory at 0x0000018502AB0588>
+
+
+A single dimension array with floats: 
+[1.1 2.2 3.3]
+float64
+8
+
+
+A single dimension array created from a tuple: 
+['a' 'b' 'c']
+<U1
+List of Lists: 
+[[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+Array from List of Lists: 
+[[1 2 3]
+ [4 5 6]
+ [7 8 9]]
+Shape: (3, 3), Dimension 2, Size 9
+Tuple of Tuples of Tuples: 
+(((1, 2), (3, 4)), ((5, 6), (7, 8)))
+Array from Tuple of Tuples of Tuples: 
+[[[1 2]
+  [3 4]]
+
+ [[5 6]
+  [7 8]]]
+Shape: (2, 2, 2), Dimension 3, Size 8
+
+
+Arrays created from heterogenous lists:
+['1' 'b' '1.5']
+<U11
+[1.  1.  1.5]
+float64
+
+
+Arrays created by specifying the data type at the creation time:
+['1' '2' '3']
+[1. 2. 3.]
+
+
+Creating blank arrays: 
+[[0 0 0 0]
+ [0 0 0 0]
+ [0 0 0 0]]
+C:/Users/320017584/PycharmProjects/PythonBasics/NumpyBasics.py:234: RuntimeWarning: divide by zero encountered in true_divide
+  print(npTempArr / 0)  # RuntimeWarning: invalid value encountered in true_divide print(npTempArr / 0)
+C:/Users/320017584/PycharmProjects/PythonBasics/NumpyBasics.py:234: RuntimeWarning: invalid value encountered in true_divide
+  print(npTempArr / 0)  # RuntimeWarning: invalid value encountered in true_divide print(npTempArr / 0)
+C:/Users/320017584/PycharmProjects/PythonBasics/NumpyBasics.py:250: RuntimeWarning: divide by zero encountered in true_divide
+  print(npArr1 / npArr2)      # [ -inf -4. -1.5 -0.66666667 -0.25 0. 0.16666667 0.28571429 0.375 0.44444444]
+[['1' '1' '1']
+ ['1' '1' '1']]
+[[1.13752555e-307 3.38240018e-306 7.58445863e-302]
+ [2.68569500e-297 1.07086168e-296 4.60890867e-287]]
+
+
+Using the arange to generate arrays:
+[10 12 14 16 18 20 22 24 26 28 30 32 34 36 38 40 42 44 46 48]
+[-5.  -3.8 -2.6 -1.4 -0.2  1.   2.2  3.4  4.6]
+[0 1 2 3 4]
+
+
+Using linspace to generate float arrays:
+[-5.  -3.8 -2.6 -1.4 -0.2  1.   2.2  3.4  4.6  5.8  7. ]
+Template array is [[1 2 3]
+ [4 5 6]]
+Zeros array using zeros_like: [[0 0 0]
+ [0 0 0]]
+Ones array using ones_like: [[1 1 1]
+ [1 1 1]]
+Empty array using empty_like: [[1 1 1]
+ [1 1 1]]
+Using full_like to initialize an array of same size as an existing one but with a default value:
+[['a' 'a' 'a']
+ ['a' 'a' 'a']]
+[   0    1    2 ... 9997 9998 9999]
+[[   0    1    2 ... 1997 1998 1999]
+ [2000 2001 2002 ... 3997 3998 3999]
+ [4000 4001 4002 ... 5997 5998 5999]
+ [6000 6001 6002 ... 7997 7998 7999]
+ [8000 8001 8002 ... 9997 9998 9999]]
+[[0.79788615 0.72076503]
+ [0.47068892 0.72990081]
+ [0.43445049 0.5397411 ]]
+[[-0.18030272  0.03513646]
+ [-0.13367629  0.04672879]
+ [-0.65246316  0.29832642]]
+Existing array [0 1 2 3 4 5 6 7 8 9] is of shape (10,)
+Reshaped array [[0 1 2 3 4]
+ [5 6 7 8 9]] is of shape (2, 5)
+Flattened array : [0 1 2 3 4 5 6 7 8 9]
+The transpose of the array 
+[[1 2]
+ [3 4]
+ [5 6]] 
+is 
+[[1 3 5]
+ [2 4 6]]
+Resize altered the array 
+[0 1 2 3 4 5] to 
+[[0 1]
+ [2 3]
+ [4 5]]
+[ 1  2  3  4  5  6  7  8  9 10]
+[ 2  3  4  5  6  7  8  9 10 11]
+[-1  0  1  2  3  4  5  6  7  8]
+[ 3  6  9 12 15 18 21 24 27 30]
+[0.5 1.  1.5 2.  2.5 3.  3.5 4.  4.5 5. ]
+[ 4  5  6  7  8  9 10 11 12 13]
+[-1  0  1  2  3  4]
+[-inf  nan  inf  inf  inf  inf]
+Arrays are :
+[-5 -4 -3 -2 -1  0  1  2  3  4] 
+and 
+[0 1 2 3 4 5 6 7 8 9]
+
+Adding them:
+[-5 -3 -1  1  3  5  7  9 11 13]
+Subtracting them:
+[-5 -5 -5 -5 -5 -5 -5 -5 -5 -5]
+Multiplying them:
+[ 0 -4 -6 -6 -4  0  6 14 24 36]
+Dividing them:
+[       -inf -4.         -1.5        -0.66666667 -0.25        0.
+  0.16666667  0.28571429  0.375       0.44444444]
+
+
+npArr1 after an inplace operation, npArr1 += npArr2:
+[-5 -3 -1  1  3  5  7  9 11 13]
+Matrix multiplcation:
+The arrays are 
+[[1 2]
+ [3 4]
+ [5 6]]
+and
+[[10 20]
+ [30 40]]
+Result of matrix multiplication:
+[[ 70 100]
+ [150 220]
+ [230 340]]
+[[ 70 100]
+ [150 220]
+ [230 340]]
+Sum of elements of 
+[[0.67564379 0.725053   0.9156477  0.03996864]
+ [0.03621786 0.96923983 0.68687294 0.88509511]
+ [0.361393   0.93733887 0.57611087 0.006178  ]]
+is
+6.814759623102113
+Min element is 0.006177998895788073 and max element is 0.96923983183793
+Sum of elements along each rows:
+[2.35631313 2.57742575 1.88102075]
+Sum of elements along each column:
+[1.07325466 2.6316317  2.17863152 0.93124175]
+Min element for each row is: 
+[0.03996864 0.03621786 0.006178  ]
+Min element for each column is: 
+[0.03621786 0.725053   0.57611087 0.006178  ]
+Max element for each row is: 
+[0.03996864 0.03621786 0.006178  ]
+Max element for each column is: 
+[0.03621786 0.725053   0.57611087 0.006178  ]
+The array is :
+[[ 1.01890225 -0.85591372  1.05829605  0.30723941 -0.35574128 -1.20836074
+  -0.90986664  0.14668162  0.4980255   0.58220148]]
+Exponential function:
+[[2.77015216 0.42489478 2.88145696 1.35966645 0.70065387 0.2986865
+  0.40257791 1.15798523 1.64546909 1.7899747 ]]
+Sin function:
+[[ 0.85153298 -0.7551702   0.8715212   0.30242848 -0.34828532 -0.93503605
+  -0.78942188  0.1461562   0.47769182  0.54986407]]
+Square Root for the positive values:
+[1.00940688 1.02873517 0.55429181 0.38299037 0.70570922 0.76302129]
+Max value in the array:
+1.0582960542455273
+Min value in the array:
+-1.2083607362827125
+Mean value is:
+0.028146396744831447
+Median value is:
+0.226960519571343
+Std Deviation is:
+0.7746136311150837
+
+Demonstrating array slicing operations
+The array is: 
+[0 1 2 3 4 5 6 7 8 9]
+Selecting the 5th element using arr[5]
+5
+Selecting upto and excluding the 4th element using arr[:4]
+[0 1 2 3]
+Selecting from the 6th element to the last element using arr[6:]
+[6 7 8 9]
+Selecting the 2nd to 4th element, excluding the 4th element using arr[2:4]
+[2 3]
+Selecting the last element using arr[-1]
+9
+
+Slicing a 2d array:
+The 2d array is:
+[[0 1 2]
+ [3 4 5]
+ [6 7 8]]
+
+Slicing using the Square bracket notation:
+Selecting the first row using arr2d[0]
+[0 1 2]
+Selecting the element at 1,1
+4
+
+Slicing using the comma notation:
+Selecting the top left four elements using arr2d[:2, :2]
+[[0 1]
+ [3 4]]
+Consider the following larger array:
+[[ 0  1  2  3  4  5  6  7]
+ [ 8  9 10 11 12 13 14 15]
+ [16 17 18 19 20 21 22 23]
+ [24 25 26 27 28 29 30 31]
+ [32 33 34 35 36 37 38 39]]
+To fetch [[1,2][9,10]] using arr2d[0:2, 1:3]
+[[ 1  2]
+ [ 9 10]]
+To fetch all rows from the 5th column using arr2d[:, 5]
+[ 5 13 21 29 37]
+To fetch all the columns in the 2nd row using arr2d[2, :]
+[16 17 18 19 20 21 22 23]
+Please note that the sliced array still refers to the same memory as the original
+Consider the array arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[0 1 2 3 4 5 6 7 8 9]
+Consider a slice using arrNew = arr[:4]
+[0 1 2 3]
+Now, we change the values of arrNew using arrNew[:] = 99
+[99 99 99 99]
+If we see the original array, arr:
+[99 99 99 99  4  5  6  7  8  9]
+The original array has also changed now. To prevent this, use the copy method
+If this is the original array created using np.arange(10)
+[0 1 2 3 4 5 6 7 8 9]
+And if this is the copied slice using arr[:4].copy()
+[0 1 2 3]
+Operating on the copied array using arrCopy[:] = 99
+[99 99 99 99]
+Original array is: 
+[0 1 2 3 4 5 6 7 8 9]
+Thus, the original array is unchanged now
+
+Selecting the array elements based on some condition:
+Consider the following array:
+[ 7 11  0  5  8 12  2  9 16  0]
+Selecting all elements greater than 10 using arr[arr > 10]
+[11 12 16]
+To get a boolean array with boolean values indicating a condition's outcome:
+[False  True False False False  True False False  True False]
+
+Process finished with exit code 0
